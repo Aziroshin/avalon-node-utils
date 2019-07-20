@@ -1,0 +1,58 @@
+# License: CC0.
+server {
+
+    listen 3001;
+    listen [::]:3001;
+
+    # Fill in your domain if applicable.
+    server_name node.dtube.christianknuchel.com;
+    
+    # We're a teapot containing Avalon coffee.
+    error_page 418 = @allowed;
+    
+    # API calls you should keep private.
+    # If you have no other plans for them, leave them commented out.
+    #location ~ ^\/addPeer.*               { deny all; }
+    #location = /cache                     { deny all; }
+    #location = /cacheb                    { deny all; }
+    #location = /mineBlock                 { deny all; }
+    #location = /newKeyPair                { deny all; }
+    #location = /nextblock                 { deny all; }
+    #location = /peers                     { deny all; }
+
+    # API calls deemed fit for public availabilty.
+    location = /allminers                  { return 418; }
+    location ~ ^\/accountPrice\/:.*        { return 418; }
+    location ~ ^\/account\/:.*             { return 418; }
+    location ~ ^\/accounts\/:.*            { return 418; }
+    location ~ ^\/block\/:.*               { return 418; }
+    location ~ ^\/blog\/:.*                { return 418; }
+    location = /config                     { return 418; }
+    location ~ ^\/content\/:.*             { return 418; }
+    location = /count                      { return 418; }
+    location ~ ^\/distributed\/:.*         { return 418; }
+    location ~ ^\/feed\/:.*                { return 418; }
+    location ~ ^\/followers\/:.*           { return 418; }
+    location ~ ^\/follows\/:.*             { return 418; }
+    location ~ ^\/history\/:.*             { return 418; }
+    location ~ ^/hot\/:.*                  { return 418; }
+    location = /hot                        { return 418; }
+    location ~ ^/new\/:.*                  { return 418; }
+    location = /new                        { return 418; }
+    location ~ ^\/notifications\/:.*       { return 418; }
+    location ~ ^\/oembed\/:.*              { return 418; }
+    location ~ ^\/opengraph\/:.*           { return 418; }
+    location = /rewardPool                 { return 418; }
+    location = /schedule                   { return 418; }
+    location ~ ^\/transact\ .*             { return 418; }
+    location = /transact                   { return 418; }
+    location ~ ^\/trending\/:.*            { return 418; }
+    location = /trending                   { return 418; }
+    location ~ ^\/youtube\/:.*             { return 418; }
+    location   /                           { deny all; }
+
+    # Proxy
+    # This where you put the things nginx needs to know about your Avalon node.
+    location   @allowed                    { proxy_pass http://localhost:30001; }
+
+}

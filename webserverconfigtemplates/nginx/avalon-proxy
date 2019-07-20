@@ -1,11 +1,15 @@
 # License: CC0.
+
+# In order to customize this to your needs, you'll have to
+# adjust YOURDOMAIN and YOURPORT according to your setup.
+
 server {
 
     listen 3001;
     listen [::]:3001;
 
     # Fill in your domain if applicable.
-    server_name node.dtube.christianknuchel.com;
+    server_name YOURDOMAIN;
     
     # We're a teapot containing Avalon coffee.
     error_page 418 = @allowed;
@@ -53,6 +57,6 @@ server {
 
     # Proxy
     # This where you put the things nginx needs to know about your Avalon node.
-    location   @allowed                    { proxy_pass http://localhost:30001; }
+    location   @allowed                    { proxy_pass http://localhost:YOURPORT; }
 
 }

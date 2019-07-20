@@ -41,7 +41,7 @@ server {
     location ~ ^\/history\/:.*             { return 418; }
     location ~ ^/hot\/:.*                  { return 418; }
     location = /hot                        { return 418; }
-    location ~ ^/new\/:.*                  { return 418; }
+    #location ~ ^/new\/:.*                  { return 418; }
     location = /new                        { return 418; }
     location ~ ^\/notifications\/:.*       { return 418; }
     location ~ ^\/oembed\/:.*              { return 418; }
